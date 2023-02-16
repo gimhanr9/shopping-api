@@ -5,10 +5,10 @@ const CategorySchema = new Schema({ name: { type: String, required: true } });
 
 const ProductSchema = new Schema({
   displayImageUrl: { type: String, required: true },
-  imageUrls: [],
+  imageUrls: [{ type: String }],
   name: { type: String, required: true },
   description: { type: String, required: true },
-  rating: { type: Float, required: true },
+  rating: { type: Number, required: true },
   category: { type: String, required: true },
   size: [
     { xsmall: { type: Number, required: true } },
