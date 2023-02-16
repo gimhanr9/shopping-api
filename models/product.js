@@ -4,6 +4,8 @@ const Schema = mongoose.Schema;
 const CategorySchema = new Schema({ name: { type: String, required: true } });
 
 const ProductSchema = new Schema({
+  displayImageUrl: { type: String, required: true },
+  imageUrls: [],
   name: { type: String, required: true },
   description: { type: String, required: true },
   rating: { type: Float, required: true },
