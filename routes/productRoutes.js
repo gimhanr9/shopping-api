@@ -7,7 +7,7 @@ router.get('/products', async (req, res) => {
     const products = await Product.find();
     res.status(200).send({ data: products });
   } catch (err) {
-    res.status(400).send({ message: err });
+    res.status(500).send({ message: err });
   }
 });
 
