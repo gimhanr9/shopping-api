@@ -8,3 +8,5 @@ router.get('/cart', async (req, res) => {});
 router.put('/updateItem', async (req, res) => {});
 
 router.delete('/deleteItem', async (req, res) => {});
+
+module.exports = router;

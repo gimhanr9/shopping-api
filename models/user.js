@@ -13,7 +13,7 @@ const UserSchema = new Schema({
   zip: { type: Number, required: true },
   country: { type: String, required: true },
   otp: { type: Number, required: true },
-  resetAttempts: { type: Number, required: true },
+  resetAttempts: { type: Number, required: true, min: 0 },
 });
 
 module.exports = mongoose.model('User', UserSchema);
