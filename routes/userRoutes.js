@@ -10,3 +10,5 @@ router.post('/forgotPassword', async (req, res) => {});
 router.post('/checkOtp', async (req, res) => {});
 
 router.post('/resetPassword', async (req, res) => {});
+
+module.exports = router;

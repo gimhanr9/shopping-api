@@ -8,7 +8,7 @@ const FavouriteSchema = new Schema({
       productId: { type: String, required: true },
       productImageUrl: { type: String, required: true },
       productName: { type: String, required: true },
-      price: { type: Number, required: true },
+      price: { type: Number, required: true, min: 0 },
     },
   ],
 });
