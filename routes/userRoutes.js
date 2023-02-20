@@ -1,14 +1,18 @@
 const express = require('express');
 const router = express.Router();
+const userController = require('../controllers/userController');
+const { auth } = require('../middleware/auth');
 
-router.post('/register', async (req, res) => {});
+router.post('/register', userController.register);
 
-router.post('/login', async (req, res) => {});
+router.post('/login', userController.login);
 
-router.post('/forgotPassword', async (req, res) => {});
+router.post('/forgotPassword', userController.forgotPassword);
 
-router.post('/checkOtp', async (req, res) => {});
+router.post('/checkOtp', userController.checkOtp);
 
-router.post('/resetPassword', async (req, res) => {});
+router.put('/resetPassword', userController.resetPassword);
+
+router.put('/updateDetails', auth, userController.updateDetails);
 
 module.exports = router;
