@@ -5,7 +5,7 @@ const getFavourites = async (req, res) => {
     const id = req.user.id;
     const favourites = await Favourite.find(
       { _id: id },
-      { products: 1, _id: 0 }
+      { products: 1, _id: 0, userId: 0 }
     );
     res.status(200).send({ data: favourites });
   } catch (err) {
