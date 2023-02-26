@@ -167,10 +167,7 @@ const checkOtp = async (req, res) => {
           });
         }
 
-        await User.updateOne(
-          { email: email },
-          { $set: { resetAttempts: existingEmail.resetAttempts + 1 } }
-        );
+        await User.updateOne({ email: email }, { $inc: { resetAttempts: 1 } });
         return res.status(401).send({ error: 'Incorrect OTP' });
       }
       await User.updateOne(
