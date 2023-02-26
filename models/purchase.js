@@ -6,6 +6,7 @@ const PurchaseSchema = new Schema(
     userId: { type: String, required: true },
     purchases: [
       {
+        purchaseId: { type: String, required: true },
         productId: { type: String, required: true },
         productImageUrl: { type: String, required: true },
         productName: { type: String, required: true },

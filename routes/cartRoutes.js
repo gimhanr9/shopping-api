@@ -1,12 +1,16 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth');
+const cartController = require('../controllers/cartController');
 
-router.post('/addItem', async (req, res) => {});
+router.post('/addItem', auth, cartController.addToCart);
 
-router.get('/cart', async (req, res) => {});
+router.get('/cart', auth, cartController.getCart);
 
-router.put('/updateItem', async (req, res) => {});
+router.put('/updateItem', auth, cartController.updateCart);
 
-router.delete('/deleteItem', async (req, res) => {});
+router.delete('/deleteItem', auth, cartController.deleteItem);
+
+router.delete('/deleteAll', auth, cartController.deleteAll);
 
 module.exports = router;

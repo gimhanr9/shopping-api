@@ -8,34 +8,17 @@ const ProductSchema = new Schema({
   description: { type: String, required: true },
   rating: { type: Number, required: true, min: 0 },
   category: { type: String, required: true },
-  size: [
-    { xsmall: { type: Number, min: 0 } },
-    { small: { type: Number, min: 0 } },
-    { medium: { type: Number, min: 0 } },
-    { large: { type: Number, min: 0 } },
-    { xlarge: { type: Number, min: 0 } },
-    { xxlarge: { type: Number, min: 0 } },
+  sizes: [
+    { XS: { type: Number, min: 0 } },
+    { S: { type: Number, min: 0 } },
+    { M: { type: Number, min: 0 } },
+    { L: { type: Number, min: 0 } },
+    { XL: { type: Number, min: 0 } },
+    { XXL: { type: Number, min: 0 } },
   ],
   price: { type: Number, required: true, min: 0 },
   discount: { type: Number, min: 0 },
-  reviews: [
-    {
-      name: { type: String },
-      rating: { type: Number, min: 0 },
-      review: { type: String },
-      date: { type: Date },
-      images: [{ imageUrl: { type: String } }],
-    },
-  ],
-
-  questions: [
-    {
-      name: { type: String },
-      question: { type: String },
-      answer: { type: String },
-      date: { type: Date },
-    },
-  ],
+  orders: { type: Number, min: 0 },
 });
 
 module.exports = mongoose.model('Product', ProductSchema);
