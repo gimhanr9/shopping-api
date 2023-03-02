@@ -18,6 +18,10 @@ const addFavourite = async (req, res) => {
     const id = req.user.id;
     const { productId, productImageUrl, productName, price } = req.body;
 
+    if (!productId || !productImageUrl || !productName || !price) {
+      return res.status(400).send({ error: 'All fields are required' });
+    }
+
     const existingFavourites = await Favourite.findOne({ userId: id });
     if (existingFavourites) {
       const existingProduct = existingFavourites.products.some((product) => {
