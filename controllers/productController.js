@@ -2,8 +2,8 @@ const Product = require('../models/product');
 const Question = require('../models/question');
 
 const getProductsByCategory = async (req, res) => {
-  const { category } = req.body;
   try {
+    const category = req.params.category;
     const products = await Product.find({ category: category });
     res.status(200).send({ data: products });
   } catch (err) {
@@ -12,9 +12,8 @@ const getProductsByCategory = async (req, res) => {
 };
 
 const getPopularProducts = async (req, res) => {
-  const { category } = req.body;
   try {
-    const products = await Product.find({ category: category });
+    const products = await Product.find().limit(8);
     res.status(200).send({ data: products });
   } catch (err) {
     res.status(500).send({ error: err });
@@ -22,15 +21,20 @@ const getPopularProducts = async (req, res) => {
 };
 
 const askQuestion = async (req, res) => {
-  const { id, name } = req.user;
-  const { productId, question } = req.body;
-
   try {
-    await question.updateOne(
+    const { id, name } = req.user;
+    const { productId, question } = req.body;
+
+    if (!productId || !question) {
+      return res.status(400).send({ error: 'All fields are required' });
+    }
+
+    await Question.updateOne(
       { productId: productId },
       {
         $push: {
           questions: {
+            userId: id,
             name,
             question,
             answer: null,

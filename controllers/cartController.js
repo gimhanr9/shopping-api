@@ -1,16 +1,28 @@
 const Cart = require('../models/cart');
 
 const addToCart = async (req, res) => {
-  const id = req.user.id;
-  const {
-    productId,
-    productImageUrl,
-    productName,
-    productSize,
-    quantity,
-    price,
-  } = req.body;
   try {
+    const id = req.user.id;
+    const {
+      productId,
+      productImageUrl,
+      productName,
+      productSize,
+      quantity,
+      price,
+    } = req.body;
+
+    if (
+      !productId ||
+      !productImageUrl ||
+      !productName ||
+      !productSize ||
+      !quantity ||
+      !price
+    ) {
+      return res.status(400).send({ error: 'All fields are required' });
+    }
+
     const existingCart = await Cart.findOne({ userId: id });
 
     if (existingCart) {
@@ -77,8 +89,8 @@ const addToCart = async (req, res) => {
 };
 
 const getCart = async (req, res) => {
-  const id = req.user.id;
   try {
+    const id = req.user.id;
     const cartItems = await Cart.find(
       { userId: id },
       { products: 1, _id: 0, userId: 0 }
@@ -90,9 +102,14 @@ const getCart = async (req, res) => {
 };
 
 const updateCart = async (req, res) => {
-  const id = req.user.id;
-  const { productId, productSize, updateType } = req.body;
   try {
+    const id = req.user.id;
+    const { productId, productSize, updateType } = req.body;
+
+    if (!productId || !productSize || !updateType) {
+      return res.status(400).send({ error: 'All fields are required' });
+    }
+
     if (updateType == 'ADD') {
       await Cart.updateOne(
         {
@@ -128,9 +145,13 @@ const updateCart = async (req, res) => {
 };
 
 const deleteItem = async (req, res) => {
-  const id = req.user.id;
-  const { productId, productSize } = req.body;
   try {
+    const id = req.user.id;
+    const { productId, productSize } = req.body;
+
+    if (!productId || !productSize) {
+      return res.status(400).send({ error: 'All fields are required' });
+    }
     await Cart.updateOne(
       {
         userId: id,
@@ -146,8 +167,8 @@ const deleteItem = async (req, res) => {
 };
 
 const deleteAll = async (req, res) => {
-  const id = req.user.id;
   try {
+    const id = req.user.id;
     await Cart.updateOne(
       { userId: id },
       { $set: { products: [] } },
