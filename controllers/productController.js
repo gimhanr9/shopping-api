@@ -13,7 +13,7 @@ const getProductsByCategory = async (req, res) => {
 
 const getPopularProducts = async (req, res) => {
   try {
-    const products = await Product.find({ orders: category }).limit(8);
+    const products = await Product.find().limit(8);
     res.status(200).send({ data: products });
   } catch (err) {
     res.status(500).send({ error: err });
